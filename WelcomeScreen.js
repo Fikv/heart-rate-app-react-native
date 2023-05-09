@@ -8,6 +8,10 @@ const WelcomeScreen = () => {
   const handleLoginPress = () => {
     navigation.navigate('LoginScreen');
   };
+  const handleRegisterPress = () => {
+    navigation.navigate('RegisterScreen');
+  };
+
 
   return (
     <View style={styles.container}>
@@ -19,7 +23,7 @@ const WelcomeScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleRegisterPress}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>

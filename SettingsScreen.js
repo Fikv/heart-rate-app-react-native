@@ -9,16 +9,24 @@ const SettingsScreen = () => {
     const handleSave = () => {
         navigation.navigate('SaveResult');
     };
+    
+    const handleResults = () => {
+        navigation.navigate('ResultScreen');
+    };
+
+    const handleNotification = () => {
+      navigation.navigate('NotificationScreen');
+  };
 
  return (
         <View style={styles.container}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText} onPress={handleSave}>Save the Measurement</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleResults}>
             <Text style={styles.buttonText}>View Results</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleNotification}>
             <Text style={styles.buttonText}>Notification Settings</Text>
           </TouchableOpacity>
         </View>

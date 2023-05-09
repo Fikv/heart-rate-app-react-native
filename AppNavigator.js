@@ -4,6 +4,9 @@ import WelcomeScreen from './WelcomeScreen';
 import LoginScreen from './LoginScreen';
 import SettingsScreen from './SettingsScreen';
 import SaveResult from './SaveResult';
+import RegisterScreen from './RegisterScreen';
+import ResultScreen from './ResultScreen';
+import NotificationScreen from './NotificationScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +30,9 @@ const AppNavigator = () => {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
       <Stack.Screen name="SaveResult" component={SaveResult} />
+      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+      <Stack.Screen name="ResultScreen" component={ResultScreen} />
+      <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
     </Stack.Navigator>
   );
 };

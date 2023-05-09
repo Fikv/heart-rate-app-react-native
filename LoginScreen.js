@@ -4,12 +4,36 @@ import SettingsScreen from './SettingsScreen';
 import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState('');
+  const [login, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
   const handleLoginPress = () => {
-      navigation.navigate('SettingsScreen');
+    const data = {
+      login: login,
+      password: password
+    };
+  
+    fetch('http://192.168.0.16:8080/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      if (responseJson === false) {
+        console.log(data);
+        console.log(responseJson);
+        alert('Login failed. Please check your username and password.');
+      } else {
+        navigation.navigate('SettingsScreen');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
   };
 
   return (
@@ -18,7 +42,7 @@ const LoginScreen = () => {
         <Text style={styles.label}>Username:</Text>
         <TextInput
           style={styles.input}
-          value={username}
+          value={login}
           onChangeText={setUsername}
           placeholder="Enter your username       "
         />
