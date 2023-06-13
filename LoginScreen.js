@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import SettingsScreen from './SettingsScreen';
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from './UserContext';
 
 const LoginScreen = () => {
-  const [login, setUsername] = useState('');
+  const [login2, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { login, setLogin } = useContext(UserContext);
   const navigation = useNavigation();
 
   const handleLoginPress = () => {
     const data = {
-      login: login,
+      login: login2,
       password: password
     };
   
-    fetch('http://192.168.0.16:8080/user/login', {
+    fetch('http://192.168.0.12:8080/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -28,6 +30,7 @@ const LoginScreen = () => {
         console.log(responseJson);
         alert('Login failed. Please check your username and password.');
       } else {
+        setLogin(login2);
         navigation.navigate('SettingsScreen');
       }
     })
@@ -42,7 +45,7 @@ const LoginScreen = () => {
         <Text style={styles.label}>Username:</Text>
         <TextInput
           style={styles.input}
-          value={login}
+          value={login2}
           onChangeText={setUsername}
           placeholder="Enter your username       "
         />

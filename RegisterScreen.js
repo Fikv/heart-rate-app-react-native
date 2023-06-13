@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const RegisterScreen = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleRegisterPress = () => {
-    // Make sure that the passwords match
+
     if (password !== repeatPassword) {
       alert('Passwords do not match');
       return;
     }
 
-    // Create the data object to be sent to the server
+
     const data = {
       username: username,
       password: password,
@@ -22,8 +24,8 @@ const RegisterScreen = () => {
       emailAddress: email
     };
 
-    // Send the data to the server using fetch
-    fetch('http://192.168.0.16:8080/user/register', {
+
+    fetch('http://192.168.0.12:8080/user/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -31,6 +33,7 @@ const RegisterScreen = () => {
       body: JSON.stringify(data)
     })
     .then(response => {
+      navigation.navigate('WelcomeScreen');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -38,11 +41,11 @@ const RegisterScreen = () => {
     })
     .then(data => {
       console.log(data);
-      // Handle the response from the server here
+      
     })
     .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-      // Handle errors here
+      
+  
     });
   };
 
@@ -120,11 +123,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#3498DB',
-    borderRadius: 10
+    borderRadius: 10,
+    paddingVertical: 18,
+    paddingHorizontal: 60,
+    marginTop: 10,
+    alignItems: 'center'
     ,
     buttonText: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 10,
